@@ -183,20 +183,16 @@ class User(SQLModelBase, UserMixin):
         user_dict = super(User, self).to_response()
         user_dict['tenants'] = _get_response_data(self.all_tenants, get_data)
         user_dict['groups'] = _get_response_data(self.groups, get_data)
-        user_dict['role'] = self.role
+        user_dict['roles'] = _get_response_data(self.roles, get_data)
         return user_dict
 
     @property
-    def role(self):
-        return self.roles[0].name
-
-    @property
     def is_default_user(self):
-        return self.role == USER_ROLE
+        return USER_ROLE in [role.name for role in self.roles]
 
     @property
     def is_admin(self):
-        return self.role == ADMIN_ROLE
+        return ADMIN_ROLE in [role.name for role in self.roles]
 
     @property
     def is_bootstrap_admin(self):

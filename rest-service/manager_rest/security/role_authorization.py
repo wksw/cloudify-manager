@@ -31,7 +31,7 @@ class RoleAuthorization(object):
         :param request: A flask request
         """
         # TODO: See if this is still relevant after the roles redesign
-        self._role = user.role
+        # self._role = user.role
         self._method = request.method
         self._endpoint = request.path
 

@@ -122,6 +122,32 @@ class UsersId(SecuredMultiTenancyResource):
         return multi_tenancy.delete_user(username)
 
 
+class UsersRoles(SecuredMultiTenancyResource):
+    @rest_decorators.exceptions_handled
+    @rest_decorators.marshal_with(UserResponse)
+    def post(self, username, multi_tenancy):
+        """
+        Add a role for a certain user
+        """
+        request_dict = rest_utils.get_json_and_verify_params()
+        role_name = request_dict.get('role')
+        if not role_name:
+            raise BadParametersError('`role` not provided')
+        return multi_tenancy.add_user_role(username, role_name)
+
+    @rest_decorators.exceptions_handled
+    @rest_decorators.marshal_with(UserResponse)
+    def delete(self, username, multi_tenancy):
+        """
+        Remove a role from a certain user
+        """
+        request_dict = rest_utils.get_json_and_verify_params()
+        role_name = request_dict.get('role')
+        if not role_name:
+            raise BadParametersError('`role` not provided')
+        return multi_tenancy.remove_user_role(username, role_name)
+
+
 class UsersActive(SecuredMultiTenancyResource):
     @rest_decorators.exceptions_handled
     @rest_decorators.marshal_with(UserResponse)

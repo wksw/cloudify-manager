@@ -58,7 +58,7 @@ class UserResponse(object):
         'username': fields.String,
         'tenants': fields.Raw,
         'groups': fields.Raw,
-        'role': fields.String,
+        'roles': fields.Raw,
         'active': fields.Boolean,
         'last_login_at': fields.String
     }
@@ -67,6 +67,6 @@ class UserResponse(object):
         self.username = kwargs.get('username')
         self.tenants = kwargs.get('tenants')
         self.groups = kwargs.get('groups')
-        self.role = kwargs.get('role')
+        self.roles = kwargs.get('roles')
         self.active = kwargs.get('active')
         self.last_login_at = kwargs.get('last_login_at')

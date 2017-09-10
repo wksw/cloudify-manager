@@ -39,7 +39,7 @@ class Tokens(SecuredResourceSkipTenantAuth):
         Get authentication token
         """
         token = current_user.get_auth_token()
-        return dict(value=token, role=current_user.role)
+        return dict(value=token, role=current_user.roles)
 
     @swagger.operation(
         responseClass=responses.Tokens,
@@ -55,4 +55,4 @@ class Tokens(SecuredResourceSkipTenantAuth):
         but supports authenticating via saml-response in the body
         """
         token = current_user.get_auth_token()
-        return dict(value=token, role=current_user.role)
+        return dict(value=token, role=current_user.roles)

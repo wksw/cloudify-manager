@@ -24,10 +24,10 @@ from manager_rest.test import base_test
 class UserTestCase(base_test.BaseServerTestCase):
 
     def test_get_user(self):
-        response = self.get('/user')
+        response = self.get('/user', query_params={'_get_data': True})
         result = loads(response.data)
         self.assertEqual('admin', result['username'])
-        self.assertEqual('admin', result['role'])
-        self.assertEqual(0, result['groups'])
-        self.assertEqual(1, result['tenants'])
+        self.assertIn('admin', result['roles'])
+        self.assertEqual(0, len(result['groups']))
+        self.assertEqual(1, len(result['tenants']))
         self.assertEqual(True, result['active'])

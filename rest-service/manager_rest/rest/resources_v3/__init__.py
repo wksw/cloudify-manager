@@ -53,5 +53,6 @@ from .users import (            # NOQA
     User,
     Users,
     UsersId,
+    UsersRoles,
     UsersActive
 )

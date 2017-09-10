@@ -78,12 +78,12 @@ class AuthenticationTests(SecurityTestBase):
         with self.use_secured_client(username='alice',
                                      password='alice_password'):
             token = self.client.tokens.get()
-        self.assertEqual(token.role, ADMIN_ROLE)
+        self.assertIn(ADMIN_ROLE, token.role)
 
         with self.use_secured_client(username='bob',
                                      password='bob_password'):
             token = self.client.tokens.get()
-        self.assertEqual(token.role, USER_ROLE)
+        self.assertIn(USER_ROLE, token.role)
 
     def test_secured_manager_blueprints_upload(self):
         with self.use_secured_client(username='alice',
